@@ -1,0 +1,28 @@
+# When you push a version tag (for example v1.6.3), this zips the extension/ folder and attaches
+# it to a GitHub Release, so people can download it without cloning the repo.
+name: Release extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Zip the extension
+        run: |
+          cd extension
+          zip -r "../rolltrack-extension-${{ github.ref_name }}.zip" .
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: rolltrack-extension-${{ github.ref_name }}.zip
+          generate_release_notes: true

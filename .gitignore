@@ -1,0 +1,17 @@
+# dependencies and build output of the TypeScript source
+node_modules/
+source-1.3.2/dist/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# logs and secrets
+*.log
+.env
+.env.*
+
+# Vercel
+.vercel/
